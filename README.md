@@ -9,25 +9,28 @@ This repository contains the **cNetworkPolicyServer** Powershell module, contain
 
 ## Examples
 ```powershell
-xRemoteFile GetRdgConfig
+configuration Sample_Set_NPS_Configuration
 {
-	Uri = 'https://storageaccountname.blob.core.windows.net/scripts/rdgconfig.xml'
-        DestinationPath = 'c:\windows\temp\reference.xml'
-        MatchSource = $true
-}
+	xRemoteFile GetRdgConfig
+	{
+		Uri = 'https://storageaccountname.blob.core.windows.net/scripts/rdgconfig.xml'
+			DestinationPath = 'c:\windows\temp\reference.xml'
+			MatchSource = $true
+	}
 
-ESNAD_cCapStore SetCentralCAP
-       {
-        CentralCAPEnabled = 1
-        RequestSOH = 1
-        NpsConfigurationFile = 'C:\windows\temp\reference.xml'
-        #DependsOn = '[xRemoteFile]GetRdgConfig'
-}
+	ESNAD_cCapStore SetCentralCAP
+		   {
+			CentralCAPEnabled = 1
+			RequestSOH = 1
+			NpsConfigurationFile = 'C:\windows\temp\reference.xml'
+			#DependsOn = '[xRemoteFile]GetRdgConfig'
+	}
 
-ESNAD_cNpsConfiguration SetNPSConfiguration
-{
-        ConfigurationFile = 'c:\windows\temp\reference.xml'
-        DependsOn = '[xRemoteFile]GetRdgConfig'
+	ESNAD_cNpsConfiguration SetNPSConfiguration
+	{
+			ConfigurationFile = 'c:\windows\temp\reference.xml'
+			DependsOn = '[xRemoteFile]GetRdgConfig'
+	}
 }
 Sample_Set_NPS_Configuration
 ```
